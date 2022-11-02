@@ -250,7 +250,7 @@ class TrainerBase:
             self.run_epoch()
             self.after_epoch()
         accuracy = self.after_train()
-        print(accuracy)
+#         print(accuracy)
         return accuracy
 
     def before_train(self):
@@ -385,7 +385,7 @@ class SimpleTrainer(TrainerBase):
             self.model = nn.DataParallel(self.model)
 
     def train(self):
-        super().train(self.start_epoch, self.max_epoch)
+        return super().train(self.start_epoch, self.max_epoch)
 
     def before_train(self):
         directory = self.cfg.OUTPUT_DIR
@@ -420,7 +420,7 @@ class SimpleTrainer(TrainerBase):
 
         # Close writer
         self.close_writer()
-        print(accuracy)
+# #         print(accuracy)
         return accuracy
 
     def after_epoch(self):
@@ -473,7 +473,7 @@ class SimpleTrainer(TrainerBase):
         for k, v in results.items():
             tag = f"{split}/{k}"
             self.write_scalar(tag, v, self.epoch)
-        print(list(results.values())[0])
+#         print(list(results.values())[0])
         return list(results.values())[0]
 
     def model_inference(self, input):

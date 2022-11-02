@@ -249,7 +249,8 @@ class TrainerBase:
             self.before_epoch()
             self.run_epoch()
             self.after_epoch()
-        self.after_train()
+        accuracy = self.after_train()
+        return accuracy
 
     def before_train(self):
         pass
@@ -409,7 +410,7 @@ class SimpleTrainer(TrainerBase):
                 self.load_model(self.output_dir)
             else:
                 print("Deploy the last-epoch model")
-            self.test()
+            accuracy = self.test()
 
         # Show elapsed time
         elapsed = round(time.time() - self.time_start)
@@ -418,6 +419,7 @@ class SimpleTrainer(TrainerBase):
 
         # Close writer
         self.close_writer()
+        return accuracy
 
     def after_epoch(self):
         last_epoch = (self.epoch + 1) == self.max_epoch

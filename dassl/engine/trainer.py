@@ -257,7 +257,7 @@ class TrainerBase:
         pass
 
     def after_train(self):
-        pass
+        raise NotImplementedError
 
     def before_epoch(self):
         pass
